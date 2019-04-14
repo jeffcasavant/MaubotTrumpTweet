@@ -2,6 +2,12 @@
 
 A plugin for Maubot that generates tweets from Trump.
 
+Usage:
+
+```
+!trump Spent too long making a fake tweet generator.  Sad!
+```
+
 # Future improvements
 * Factor out the tweet generation fully into a separate library
 * Set the user up to add additional tweet users
