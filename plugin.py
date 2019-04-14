@@ -8,7 +8,7 @@ import zipfile
 from PIL import Image, ImageDraw, ImageFont
 from maubot import Plugin, MessageEvent
 from maubot.handlers import command
-from mautrix.client.api.types.event.message import MediaMessageEventContent
+from mautrix.client.api.types.event.message import MediaMessageEventContent, ImageInfo
 
 BASE_PATH = path.dirname(path.realpath(__file__))
 
@@ -66,7 +66,7 @@ class Tweet:
         self.replies = randrange(self.retweets)
 
     def render(self):
-        content = wrap(self.content, width=47)
+        content = wrap(self.content, width=50)
         height_addl = 24 * (len(content) - 1)
         content = "\n".join(content)
 
@@ -220,17 +220,23 @@ def trump_user():
 
 class TrumpTweetPlugin(Plugin):
     @command.new("trump")
-    @command.argument("content", pass_raw=True, required=True)
-    async def handler(self, evt: MessageEvent, content: str) -> None:
+    @command.argument("message", pass_raw=True, required=True)
+    async def handler(self, evt: MessageEvent, message: str) -> None:
         await evt.mark_read()
         trump = trump_user()
-        tweet = Tweet(trump, content)
+        tweet = Tweet(trump, message)
 
-        img = BytesIO()
-        tweet.render().save(img, format="png")
+        file = BytesIO()
+        img = tweet.render()
+        img.save(file, format="png")
 
-        mxc_uri = await self.client.upload_media(img.getvalue(), mime_type="image/png")
+        mxc_uri = await self.client.upload_media(file.getvalue(), mime_type="image/png")
         content = MediaMessageEventContent()
+        info = ImageInfo()
+        info.width, info.height = img.size
+        info.mimetype = "image/png"
+        content.info = info
+        content.body = "tweet"
         content.msgtype = "m.image"
         content.url = mxc_uri
 
