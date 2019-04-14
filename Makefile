@@ -1,8 +1,8 @@
 lint:
-	pylint faketweet
+	pylint plugin.py
 
 format:
-	black faketweet
+	black plugin.py
 
-run:
-	python -m faketweet.faketweet
+build:
+	mbc build

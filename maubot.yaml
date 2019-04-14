@@ -1,0 +1,106 @@
+
+# This is an example maubot plugin definition file.
+# All plugins must include a file like this named "maubot.yaml" in their root directory.
+
+# Target maubot version
+maubot: 0.1.0
+
+# The unique ID for the plugin. Java package naming style. (i.e. use your own domain, not xyz.maubot)
+id: casavant.jeff.trumptweet
+
+# A PEP 440 compliant version string.
+version: 1.0.0
+
+# The SPDX license identifier for the plugin. https://spdx.org/licenses/
+# Optional, assumes all rights reserved if omitted.
+license: MIT
+
+# The list of modules to load from the plugin archive.
+# Modules can be directories with an __init__.py file or simply python files.
+# Submodules that are imported by modules listed here don't need to be listed separately.
+# However, top-level modules must always be listed even if they're imported by other modules.
+modules:
+  - plugin
+
+# The main class of the plugin. Format: module/Class
+# If `module` is omitted, will default to last module specified in the module list.
+# Even if `module` is not omitted here, it must be included in the modules list.
+# The main class must extend maubot.Plugin
+main_class: TrumpTweetPlugin
+
+# Whether or not instances need a database
+database: false
+
+#  Extra files that the upcoming build tool should include in the mbp file.
+extra_files:
+  - res/font/Roboto-Black.ttf
+  - res/font/Roboto-Regular.ttf
+  - res/img/avatars/cartoon0.jpg
+  - res/img/avatars/cartoon1.jpg
+  - res/img/avatars/cartoon2.jpg
+  - res/img/avatars/cartoon3.jpg
+  - res/img/avatars/cartoon4.jpg
+  - res/img/avatars/cartoon5.jpg
+  - res/img/avatars/cartoon6.jpg
+  - res/img/avatars/cartoon7.jpg
+  - res/img/avatars/cartoon8.jpg
+  - res/img/avatars/cartoon9.jpg
+  - res/img/avatars/default.png
+  - res/img/avatars/real0.jpg
+  - res/img/avatars/real1.jpg
+  - res/img/avatars/real10.jpg
+  - res/img/avatars/real11.jpg
+  - res/img/avatars/real12.jpg
+  - res/img/avatars/real13.jpg
+  - res/img/avatars/real14.jpg
+  - res/img/avatars/real15.jpeg
+  - res/img/avatars/real16.jpg
+  - res/img/avatars/real17.jpg
+  - res/img/avatars/real18.jpg
+  - res/img/avatars/real19.jpeg
+  - res/img/avatars/real2.jpg
+  - res/img/avatars/real20.jpg
+  - res/img/avatars/real21.jpg
+  - res/img/avatars/real22.jpg
+  - res/img/avatars/real23.jpg
+  - res/img/avatars/real24.jpg
+  - res/img/avatars/real25.jpg
+  - res/img/avatars/real26.jpg
+  - res/img/avatars/real27.jpg
+  - res/img/avatars/real28.jpeg
+  - res/img/avatars/real29.jpg
+  - res/img/avatars/real3.jpeg
+  - res/img/avatars/real4.jpg
+  - res/img/avatars/real5.jpg
+  - res/img/avatars/real6.jpeg
+  - res/img/avatars/real7.jpg
+  - res/img/avatars/real8.jpeg
+  - res/img/avatars/real9.jpg
+  - res/img/like.png
+  - res/img/reply.png
+  - res/img/retweet.png
+  - res/img/trump.jpg
+  - res/img/verified.png
+
+# List of dependencies
+dependencies:
+  - appdirs==1.4.3
+  - astroid==2.2.5
+  - attrs==19.1.0
+  - black==19.3b0
+  - Click==7.0
+  - imgkit==1.0.1
+  - isort==4.3.17
+  - Jinja2==2.10.1
+  - lazy-object-proxy==1.3.1
+  - MarkupSafe==1.1.1
+  - mccabe==0.6.1
+  - Pillow==6.0.0
+  - pylint==2.3.1
+  - six==1.12.0
+  - toml==0.10.0
+  - typed-ast==1.3.1
+  - wrapt==1.11.1
+
+#soft_dependencies:
+#- bar>=0.1
