@@ -8,6 +8,12 @@ Usage:
 !trump Spent too long making a fake tweet generator.  Sad!
 ```
 
+# Installation
+
+On your Maubot system, install wkhtmltopdf.  Download `.mbp` from the latest
+release.  Upload to your Maubot installation and connect it to an instance as
+normal.
+
 # Future improvements
 * Factor out the tweet generation fully into a separate library
 * Set the user up to add additional tweet users
