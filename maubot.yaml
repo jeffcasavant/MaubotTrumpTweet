@@ -1,37 +1,11 @@
-
-# This is an example maubot plugin definition file.
-# All plugins must include a file like this named "maubot.yaml" in their root directory.
-
-# Target maubot version
 maubot: 0.1.0
-
-# The unique ID for the plugin. Java package naming style. (i.e. use your own domain, not xyz.maubot)
 id: casavant.jeff.trumptweet
-
-# A PEP 440 compliant version string.
-version: 1.0.1
-
-# The SPDX license identifier for the plugin. https://spdx.org/licenses/
-# Optional, assumes all rights reserved if omitted.
+version: 1.0.2
 license: MIT
-
-# The list of modules to load from the plugin archive.
-# Modules can be directories with an __init__.py file or simply python files.
-# Submodules that are imported by modules listed here don't need to be listed separately.
-# However, top-level modules must always be listed even if they're imported by other modules.
 modules:
   - plugin
-
-# The main class of the plugin. Format: module/Class
-# If `module` is omitted, will default to last module specified in the module list.
-# Even if `module` is not omitted here, it must be included in the modules list.
-# The main class must extend maubot.Plugin
 main_class: TrumpTweetPlugin
-
-# Whether or not instances need a database
 database: false
-
-#  Extra files that the upcoming build tool should include in the mbp file.
 extra_files:
   - res/font/Roboto-Black.ttf
   - res/font/Roboto-Regular.ttf
@@ -82,25 +56,7 @@ extra_files:
   - res/img/trump.jpg
   - res/img/verified.png
 
-# List of dependencies
 dependencies:
-  - appdirs==1.4.3
-  - astroid==2.2.5
-  - attrs==19.1.0
-  - black==19.3b0
-  - Click==7.0
-  - imgkit==1.0.1
-  - isort==4.3.17
-  - Jinja2==2.10.1
-  - lazy-object-proxy==1.3.1
-  - MarkupSafe==1.1.1
-  - mccabe==0.6.1
-  - Pillow==6.0.0
-  - pylint==2.3.1
-  - six==1.12.0
-  - toml==0.10.0
-  - typed-ast==1.3.1
-  - wrapt==1.11.1
-
-#soft_dependencies:
-#- bar>=0.1
+  - maubot==0.1.0.dev28
+  - mautrix==0.4.0.dev79
+  - Pillow==6.2.1

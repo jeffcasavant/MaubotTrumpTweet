@@ -61,9 +61,9 @@ class Tweet:
         self.user = user
         self.content = content
         self.time = datetime.now()
-        self.retweets = randrange(1000, 5000)
-        self.likes = randrange(self.retweets, 2 * self.retweets)
-        self.replies = randrange(self.retweets)
+        self.retweets = randrange(1000, 5000) # nosec
+        self.likes = randrange(self.retweets, 2 * self.retweets) # nosec
+        self.replies = randrange(self.retweets) # nosec
 
     def render(self):
         content = wrap(self.content, width=50)
@@ -160,7 +160,7 @@ class Tweet:
         mask_draw.ellipse((0, 0) + (20, 20), fill=255)
         for index in range(10):
             avatar = Image.open(
-                load_resource("res/img/avatars/{}".format(choice(avatars)))
+                load_resource("res/img/avatars/{}".format(choice(avatars))) # nosec
             ).resize((20, 20))
             img.paste(
                 avatar,
