@@ -34,7 +34,7 @@ def load_resource(path: str):
         mbp = zipfile.ZipFile(BASE_PATH)
         return mbp.open(path)
     else:
-        return open(path)
+        return open(path, 'rb')
 
 
 def human_fmt(n):
