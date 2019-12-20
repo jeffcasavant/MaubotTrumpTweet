@@ -65,10 +65,38 @@ class Tweet:
         self.likes = randrange(self.retweets, 2 * self.retweets) # nosec
         self.replies = randrange(self.retweets) # nosec
 
+    @classmethod
+    def _draw_message_multicolored(cls, img, content, content_font, height):
+        text_color = "#14171a"
+        link_color = "#0084b4"
+        y_text = 70
+        fill = " @ "
+        
+        tmp = Image.new("RGB", (2000, height), color="white") # scrap image
+        cursor = ImageDraw.Draw(tmp)        
+        w_fill, y = cursor.textsize(fill, font=content_font)
+
+        for line in content:
+            _, height = content_font.getsize(line)
+            x_draw, x_paste = 0, cls._border
+            current_color = text_color
+            for char in line:
+                if char in ['@', '#']:
+                    current_color = link_color
+                elif current_color != text_color and not (char.isalpha() or char == '_'):
+                    current_color = text_color
+                w_full = cursor.textsize(fill+char,font=content_font)[0]
+                w = w_full - w_fill
+                cursor.text((x_draw, y_text), fill+char, font=content_font, fill=current_color)
+                cut = tmp.crop((x_draw+w_fill, y_text+1, x_draw+w_full, y_text+y))
+                img.paste(cut, (x_paste, y_text))
+                x_draw += w_full
+                x_paste += w
+            y_text += height
+
     def render(self):
         content = wrap(self.content, width=50)
         height_addl = 24 * (len(content) - 1)
-        content = "\n".join(content)
 
         img = Image.new("RGB", (Tweet._width, 236 + height_addl), color="white")
 
@@ -97,7 +125,7 @@ class Tweet:
         content_font = ImageFont.truetype(
             load_resource("res/font/Roboto-Regular.ttf"), 22
         )
-        cursor.text((Tweet._border, 70), content, font=content_font, fill="#14171a")
+        self._draw_message_multicolored(img, content, content_font, img.height)
 
         # Draw timestamp
         date_font = ImageFont.truetype(load_resource("res/font/Roboto-Regular.ttf"), 12)
