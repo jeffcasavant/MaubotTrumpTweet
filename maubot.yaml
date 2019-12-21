@@ -1,6 +1,6 @@
 maubot: 0.1.0
 id: casavant.jeff.trumptweet
-version: 1.0.2
+version: 1.0.3
 license: MIT
 modules:
   - plugin
