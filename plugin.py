@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from datetime import datetime
 from io import BytesIO
 from os import listdir, path
@@ -21,20 +23,18 @@ def list_avatars():
     if BASE_PATH.endswith(".mbp"):
         mbp = zipfile.ZipFile(BASE_PATH)
         return [path.basename(file.filename) for file in mbp.infolist() if file.filename.startswith(avatar_path)]
-    else:
-        return listdir(avatar_path)
+    return listdir(avatar_path)
 
 
-def load_resource(path: str):
+def load_resource(from_path: str):
 
     if BASE_PATH.endswith(".mbp"):
         mbp = zipfile.ZipFile(BASE_PATH)
-        return mbp.open(path)
-    else:
-        return open(path, "rb")
+        return mbp.open(from_path)
+    return open(from_path, "rb")
 
 
-def human_fmt(n):
+def format_number(n):  # pylint: disable=invalid-name
     for mag, abbr in [(1000000, "M"), (1000, "K")]:
         if n > mag:
             return "{:.1f}{}".format(n / mag, abbr)
@@ -63,7 +63,7 @@ class Tweet:
         self.replies = randrange(self.retweets)  # nosec
 
     @classmethod
-    def _draw_message_multicolored(cls, img, content, content_font, height, cursor):
+    def _draw_message_multicolored(cls, content, content_font, height, cursor):
         text_color = "#14171a"
         link_color = "#0084b4"
         y_text = 70
@@ -105,7 +105,7 @@ class Tweet:
 
         # Draw message
         content_font = ImageFont.truetype(load_resource("res/font/Roboto-Regular.ttf"), 22)
-        self._draw_message_multicolored(img, content, content_font, img.height, cursor)
+        self._draw_message_multicolored(content, content_font, img.height, cursor)
 
         # Draw timestamp
         date_font = ImageFont.truetype(load_resource("res/font/Roboto-Regular.ttf"), 12)
@@ -165,17 +165,17 @@ class Tweet:
         img.paste(reply, (10, 198 + height_addl), mask=reply)
         bottom_stat_font = ImageFont.truetype(load_resource("res/font/Roboto-Black.ttf"), 12)
         cursor.text(
-            (45, bottomstats_text_height), human_fmt(self.replies), font=bottom_stat_font, fill="#657786",
+            (45, bottomstats_text_height), format_number(self.replies), font=bottom_stat_font, fill="#657786",
         )
         retweet = Image.open(load_resource("res/img/retweet.png")).resize((26, 16))
         img.paste(retweet, (85, 200 + height_addl), mask=retweet)
         cursor.text(
-            (125, bottomstats_text_height), human_fmt(self.retweets), font=bottom_stat_font, fill="#657786",
+            (125, bottomstats_text_height), format_number(self.retweets), font=bottom_stat_font, fill="#657786",
         )
         like = Image.open(load_resource("res/img/like.png")).resize((20, 20))
         img.paste(like, (165, 200 + height_addl), mask=like)
         cursor.text(
-            (200, bottomstats_text_height), human_fmt(self.likes), font=bottom_stat_font, fill="#657786",
+            (200, bottomstats_text_height), format_number(self.likes), font=bottom_stat_font, fill="#657786",
         )
 
         return img
@@ -195,9 +195,7 @@ def render_tweet(message):
     trump = trump_user()
     tweet = Tweet(trump, message)
 
-    file = BytesIO()
     img = tweet.render()
-    img.save(file, format="png")
     return img
 
 
@@ -207,6 +205,8 @@ class TrumpTweetPlugin(Plugin):
     async def handler(self, evt: MessageEvent, message: str) -> None:
         await evt.mark_read()
         img = render_tweet(message)
+        file = BytesIO()
+        img.save(file, format="png")
         mxc_uri = await self.client.upload_media(file.getvalue(), mime_type="image/png")
         content = MediaMessageEventContent()
         info = ImageInfo()
@@ -221,5 +221,5 @@ class TrumpTweetPlugin(Plugin):
 
 
 if __name__ == "__main__":
-    message = " ".join(sys.argv[1:])
-    render_tweet(message).show()
+    _message = " ".join(sys.argv[1:])
+    render_tweet(_message).show()
