@@ -1,6 +1,6 @@
 maubot: 0.1.0
 id: casavant.jeff.trumptweet
-version: 1.0.5
+version: 1.0.6
 license: MIT
 modules:
   - plugin
@@ -57,6 +57,6 @@ extra_files:
   - res/img/verified.png
 
 dependencies:
-  - maubot==0.1.0.dev28
-  - mautrix==0.4.0.dev79
-  - Pillow==6.2.1
+  - maubot==0.1.0
+  - mautrix==0.7.14
+  - Pillow==8.0.1
