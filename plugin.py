@@ -11,7 +11,7 @@ import zipfile
 from PIL import Image, ImageDraw, ImageFont
 from maubot import Plugin, MessageEvent
 from maubot.handlers import command
-from mautrix.client.api.types.event.message import MediaMessageEventContent, ImageInfo
+from mautrix.types.event.message import MediaMessageEventContent, ImageInfo
 
 BASE_PATH = path.dirname(path.realpath(__file__))
 
