@@ -19,7 +19,7 @@ packaging==20.8
 Pillow==8.1.1
 prompt-toolkit==1.0.14
 pycparser==2.20
-Pygments==2.7.3
+Pygments==2.7.4
 PyInquirer==1.0.3
 pyparsing==2.4.7
 python-dateutil==2.8.1
