@@ -1,17 +1,18 @@
 #! /usr/bin/env python3
 
+
+import sys
+import zipfile
 from datetime import datetime
 from io import BytesIO
 from os import listdir, path
-from random import randrange, choice
+from random import choice, randrange
 from textwrap import wrap
-import sys
-import zipfile
 
-from PIL import Image, ImageDraw, ImageFont
-from maubot import Plugin, MessageEvent
+from maubot import MessageEvent, Plugin
 from maubot.handlers import command
-from mautrix.types.event.message import MediaMessageEventContent, ImageInfo
+from mautrix.types.event.message import ImageInfo, MediaMessageEventContent
+from PIL import Image, ImageDraw, ImageFont
 
 BASE_PATH = path.dirname(path.realpath(__file__))
 
@@ -21,16 +22,16 @@ def list_avatars():
     avatar_path = "res/img/avatars"
 
     if BASE_PATH.endswith(".mbp"):
-        mbp = zipfile.ZipFile(BASE_PATH)
-        return [path.basename(file.filename) for file in mbp.infolist() if file.filename.startswith(avatar_path)]
+        with zipfile.ZipFile(BASE_PATH) as mbp:
+            return [path.basename(file.filename) for file in mbp.infolist() if file.filename.startswith(avatar_path)]
     return listdir(avatar_path)
 
 
 def load_resource(from_path: str):
 
     if BASE_PATH.endswith(".mbp"):
-        mbp = zipfile.ZipFile(BASE_PATH)
-        return mbp.open(from_path)
+        with zipfile.ZipFile(BASE_PATH) as mbp:
+            return mbp.open(from_path)
     return open(from_path, "rb")
 
 
@@ -119,12 +120,18 @@ class Tweet:
         # Draw stats
         highlight_stat_font = ImageFont.truetype(load_resource("res/font/Roboto-Black.ttf"), 13)
         cursor.text(
-            (Tweet._border, 157 + height_addl), "{:,}".format(self.retweets), font=highlight_stat_font, fill="#14171a",
+            (Tweet._border, 157 + height_addl),
+            "{:,}".format(self.retweets),
+            font=highlight_stat_font,
+            fill="#14171a",
         )
         stat_name_font = ImageFont.truetype(load_resource("res/font/Roboto-Regular.ttf"), 13)
         cursor.text((47, 157 + height_addl), "Retweets", font=stat_name_font, fill="#657786")
         cursor.text(
-            (110, 157 + height_addl), "{:,}".format(self.likes), font=highlight_stat_font, fill="#14171a",
+            (110, 157 + height_addl),
+            "{:,}".format(self.likes),
+            font=highlight_stat_font,
+            fill="#14171a",
         )
         cursor.text((148, 157 + height_addl), "Likes", font=stat_name_font, fill="#657786")
 
@@ -136,10 +143,12 @@ class Tweet:
         vertical_width = 190
         cursor.line((line_start, topline_height) + (line_end, topline_height), fill="lightgray")
         cursor.line(
-            (vertical_width, topline_height) + (vertical_width, bottomline_height), fill="lightgray",
+            (vertical_width, topline_height) + (vertical_width, bottomline_height),
+            fill="lightgray",
         )
         cursor.line(
-            (line_start, bottomline_height) + (line_end, bottomline_height), fill="lightgray",
+            (line_start, bottomline_height) + (line_end, bottomline_height),
+            fill="lightgray",
         )
 
         # Add side avatars
@@ -151,7 +160,9 @@ class Tweet:
         for index in range(10):
             avatar = Image.open(load_resource("res/img/avatars/{}".format(choice(avatars)))).resize((20, 20))  # nosec
             img.paste(
-                avatar, (avatar_base_width + index * 24, 157 + height_addl), mask=small_avatar_mask,
+                avatar,
+                (avatar_base_width + index * 24, 157 + height_addl),
+                mask=small_avatar_mask,
             )
 
         # Add verification
@@ -165,17 +176,26 @@ class Tweet:
         img.paste(reply, (10, 198 + height_addl), mask=reply)
         bottom_stat_font = ImageFont.truetype(load_resource("res/font/Roboto-Black.ttf"), 12)
         cursor.text(
-            (45, bottomstats_text_height), format_number(self.replies), font=bottom_stat_font, fill="#657786",
+            (45, bottomstats_text_height),
+            format_number(self.replies),
+            font=bottom_stat_font,
+            fill="#657786",
         )
         retweet = Image.open(load_resource("res/img/retweet.png")).resize((26, 16))
         img.paste(retweet, (85, 200 + height_addl), mask=retweet)
         cursor.text(
-            (125, bottomstats_text_height), format_number(self.retweets), font=bottom_stat_font, fill="#657786",
+            (125, bottomstats_text_height),
+            format_number(self.retweets),
+            font=bottom_stat_font,
+            fill="#657786",
         )
         like = Image.open(load_resource("res/img/like.png")).resize((20, 20))
         img.paste(like, (165, 200 + height_addl), mask=like)
         cursor.text(
-            (200, bottomstats_text_height), format_number(self.likes), font=bottom_stat_font, fill="#657786",
+            (200, bottomstats_text_height),
+            format_number(self.likes),
+            font=bottom_stat_font,
+            fill="#657786",
         )
 
         return img
@@ -221,5 +241,5 @@ class TrumpTweetPlugin(Plugin):
 
 
 if __name__ == "__main__":
-    _message = " ".join(sys.argv[1:])
-    render_tweet(_message).show()
+    MESSAGE = " ".join(sys.argv[1:])
+    render_tweet(MESSAGE).show()
