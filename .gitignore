@@ -1,3 +1,5 @@
 __pycache__
 .venv
 *.mbp
+maubot.yaml
+requirements.txt
