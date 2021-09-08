@@ -1,0 +1,101 @@
+[tool.poetry]
+name = "casavant.jeff.trumptweet"
+version = "1.0.9"
+description = "Maubot plugin for generating fake Trump tweets"
+authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+maubot = "^0.1.2"
+mautrix = "<0.10"
+Pillow = "^8.3.2"
+
+[tool.poetry.dev-dependencies]
+bandit = "^1.7.0"
+black = "^21.8b0"
+safety = "^1.10.3"
+pylint = "^2.10.2"
+isort = "^5.9.3"
+toml = "^0.10.2"
+"ruamel.yaml" = "^0.17.16"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pylint."MESSAGES_CONTROL"]
+disable = [
+    "bad-continuation",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "too-few-public-methods",
+    "too-many-locals",
+    "too-many-statements"
+]
+
+[tool.pylint."FORMAT"]
+max-line-length = 120
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.maubot]
+maubot = "0.1.0"
+modules = ["plugin"]
+main_class = "TrumpTweetPlugin"
+database = false
+extra_files = [
+  "res/font/Roboto-Black.ttf",
+  "res/font/Roboto-Regular.ttf",
+  "res/img/avatars/cartoon0.jpg",
+  "res/img/avatars/cartoon1.jpg",
+  "res/img/avatars/cartoon2.jpg",
+  "res/img/avatars/cartoon3.jpg",
+  "res/img/avatars/cartoon4.jpg",
+  "res/img/avatars/cartoon5.jpg",
+  "res/img/avatars/cartoon6.jpg",
+  "res/img/avatars/cartoon7.jpg",
+  "res/img/avatars/cartoon8.jpg",
+  "res/img/avatars/cartoon9.jpg",
+  "res/img/avatars/default.png",
+  "res/img/avatars/real0.jpg",
+  "res/img/avatars/real1.jpg",
+  "res/img/avatars/real10.jpg",
+  "res/img/avatars/real11.jpg",
+  "res/img/avatars/real12.jpg",
+  "res/img/avatars/real13.jpg",
+  "res/img/avatars/real14.jpg",
+  "res/img/avatars/real15.jpeg",
+  "res/img/avatars/real16.jpg",
+  "res/img/avatars/real17.jpg",
+  "res/img/avatars/real18.jpg",
+  "res/img/avatars/real19.jpeg",
+  "res/img/avatars/real2.jpg",
+  "res/img/avatars/real20.jpg",
+  "res/img/avatars/real21.jpg",
+  "res/img/avatars/real22.jpg",
+  "res/img/avatars/real23.jpg",
+  "res/img/avatars/real24.jpg",
+  "res/img/avatars/real25.jpg",
+  "res/img/avatars/real26.jpg",
+  "res/img/avatars/real27.jpg",
+  "res/img/avatars/real28.jpeg",
+  "res/img/avatars/real29.jpg",
+  "res/img/avatars/real3.jpeg",
+  "res/img/avatars/real4.jpg",
+  "res/img/avatars/real5.jpg",
+  "res/img/avatars/real6.jpeg",
+  "res/img/avatars/real7.jpg",
+  "res/img/avatars/real8.jpeg",
+  "res/img/avatars/real9.jpg",
+  "res/img/like.png",
+  "res/img/reply.png",
+  "res/img/retweet.png",
+  "res/img/trump.jpg",
+  "res/img/verified.png"
+]
