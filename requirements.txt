@@ -16,7 +16,7 @@ maubot==0.1.0
 mautrix==0.7.14
 multidict==5.1.0
 packaging==20.8
-Pillow==8.1.1
+Pillow==8.3.2
 prompt-toolkit==1.0.14
 pycparser==2.20
 Pygments==2.7.4
