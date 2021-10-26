@@ -233,7 +233,7 @@ class TrumpTweetPlugin(Plugin):
         info.width, info.height = img.size
         info.mimetype = "image/png"
         content.info = info
-        content.body = "tweet"
+        content.body = "tweet.png"
         content.msgtype = "m.image"
         content.url = mxc_uri
 
