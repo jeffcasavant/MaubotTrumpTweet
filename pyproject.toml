@@ -9,7 +9,7 @@ license = "MIT"
 python = "^3.7"
 maubot = "^0.1.2"
 mautrix = "<0.10"
-Pillow = "^8.3.2"
+Pillow = "^9.0.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
