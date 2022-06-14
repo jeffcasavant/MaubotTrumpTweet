@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "casavant.jeff.trumptweet"
-version = "1.0.10"
+version = "1.1.0"
 description = "Maubot plugin for generating fake Trump tweets"
 authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.7"
-maubot = "^0.1.2"
-mautrix = "<0.10"
-Pillow = "^8.3.2"
+python = "^3.8"
+maubot = "^0.3.1"
+mautrix = "^0.15.8"
+Pillow = "^9.0.1"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
