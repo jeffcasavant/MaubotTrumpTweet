@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "casavant.jeff.trumptweet"
-version = "1.1.1"
+version = "1.1.2"
 description = "Maubot plugin for generating fake Trump tweets"
 authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
 license = "MIT"
@@ -46,7 +46,7 @@ profile = "black"
 
 [tool.maubot]
 maubot = "0.1.0"
-modules = ["plugin"]
+modules = ["trumptweet"]
 main_class = "TrumpTweetPlugin"
 database = false
 extra_files = [
