@@ -70,7 +70,7 @@ class Tweet:
         y_text = 70
 
         for line in content:
-            _, height = content_font.getsize(line)
+            height = content_font.getbbox(line)[3]
             x_draw = cls._border
             current_color = text_color
             for char in line:
@@ -78,7 +78,7 @@ class Tweet:
                     current_color = link_color
                 elif current_color != text_color and not (char.isalnum() or char == "_"):
                     current_color = text_color
-                width, _ = cursor.textsize(char, font=content_font)
+                width = cursor.textlength(char, font=content_font)
                 cursor.text((x_draw, y_text), char, font=content_font, fill=current_color)
                 x_draw += width - 1
             y_text += height
