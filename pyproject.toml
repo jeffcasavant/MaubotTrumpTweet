@@ -6,10 +6,12 @@ authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
-maubot = "^0.3.1"
-mautrix = "^0.15.8"
+python = "^3.10"
+maubot = "^0.4.2"
+mautrix = "^0.20.4"
 Pillow = "^9.0.1"
+# asyncpg is a transitive dep, but before this version has an invalid pyproject.toml
+asyncpg = ">=0.26.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
