@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "casavant.jeff.trumptweet"
-version = "1.1.2"
+version = "1.1.3"
 description = "Maubot plugin for generating fake Trump tweets"
 authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
 license = "MIT"
@@ -9,7 +9,7 @@ license = "MIT"
 python = "^3.10"
 maubot = "^0.4.2"
 mautrix = "^0.20.4"
-Pillow = "^9.0.1"
+Pillow = "^9.3.0"
 # asyncpg is a transitive dep, but before this version has an invalid pyproject.toml
 asyncpg = ">=0.26.0"
 

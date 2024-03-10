@@ -22,4 +22,8 @@ requirements.txt: poetry.lock
 maubot.yaml: pyproject.toml requirements.txt
 	poetry run scripts/build_maubot_yaml.py
 
+clean:
+	rm -f requirements.txt
+	rm -f casavant.jeff.trumptweet*.mbp
+
 test: lint security

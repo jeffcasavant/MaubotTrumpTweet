@@ -12,7 +12,8 @@ maubot_yaml["id"] = pyproject["tool"]["poetry"]["name"]
 maubot_yaml["version"] = pyproject["tool"]["poetry"]["version"]
 maubot_yaml["license"] = pyproject["tool"]["poetry"]["license"]
 
-maubot_yaml['dependencies'] = []
+with open("requirements.txt", mode="r", encoding="utf8") as f:
+    maubot_yaml["dependencies"] = [line.strip() for line in f.readlines()]
 
 for k, v in pyproject["tool"]["maubot"].items():
     maubot_yaml[k] = v
