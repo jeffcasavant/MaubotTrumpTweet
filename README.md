@@ -10,9 +10,8 @@ Usage:
 
 # Installation
 
-On your Maubot system, install wkhtmltopdf.  Download `.mbp` from the latest
-release.  Upload to your Maubot installation and connect it to an instance as
-normal.
+Download `.mbp` from the latest release.  Upload to your Maubot installation
+and connect it to an instance as normal.
 
 # Building
 
