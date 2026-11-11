@@ -38,7 +38,7 @@ def load_resource(from_path: str):
 def format_number(n):  # pylint: disable=invalid-name
     for mag, abbr in [(1000000, "M"), (1000, "K")]:
         if n > mag:
-            return "{:.1f}{}".format(n / mag, abbr)
+            return f"{n / mag:.1f}{abbr}"
     return str(n)
 
 
@@ -121,7 +121,7 @@ class Tweet:
         highlight_stat_font = ImageFont.truetype(load_resource("res/font/Roboto-Black.ttf"), 13)
         cursor.text(
             (Tweet._border, 157 + height_addl),
-            "{:,}".format(self.retweets),
+            f"{self.retweets:,}",
             font=highlight_stat_font,
             fill="#14171a",
         )
@@ -129,7 +129,7 @@ class Tweet:
         cursor.text((47, 157 + height_addl), "Retweets", font=stat_name_font, fill="#657786")
         cursor.text(
             (110, 157 + height_addl),
-            "{:,}".format(self.likes),
+            f"{self.likes:,}",
             font=highlight_stat_font,
             fill="#14171a",
         )
@@ -158,7 +158,7 @@ class Tweet:
         mask_draw = ImageDraw.Draw(small_avatar_mask)
         mask_draw.ellipse((0, 0) + (20, 20), fill=255)
         for index in range(10):
-            avatar = Image.open(load_resource("res/img/avatars/{}".format(choice(avatars)))).resize((20, 20))  # nosec
+            avatar = Image.open(load_resource(f"res/img/avatars/{choice(avatars)}")).resize((20, 20))  # nosec
             img.paste(
                 avatar,
                 (avatar_base_width + index * 24, 157 + height_addl),
