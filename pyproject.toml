@@ -6,18 +6,18 @@ authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-maubot = "^0.4.2"
-mautrix = "^0.20.4"
-Pillow = "^9.3.0"
+python = "^3.11"
+maubot = "^0.6.0"
+mautrix = "^0.21.0"
+Pillow = "^13.0.0"
 # asyncpg is a transitive dep, but before this version has an invalid pyproject.toml
 asyncpg = ">=0.26.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
-black = "^21.8b0"
+black = "^26.10.1"
 safety = "^1.10.3"
-pylint = "^2.10.2"
+pylint = "^4.0.9"
 isort = "^5.9.3"
 toml = "^0.10.2"
 "ruamel.yaml" = "^0.17.16"
@@ -28,7 +28,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pylint."MESSAGES_CONTROL"]
 disable = [
-    "bad-continuation",
     "missing-class-docstring",
     "missing-function-docstring",
     "missing-module-docstring",
